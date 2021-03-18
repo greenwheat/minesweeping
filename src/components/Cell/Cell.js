@@ -21,7 +21,7 @@ export function Cell(props) {
   // console.log("cell props", props);
   const inner = (() => {
     if (props.flag && !props.opened) {
-      return <span className="flag">O</span>;
+      return <span className="flag">P</span>;
     }
     if (props.bomb) {
       if (props.opened) {

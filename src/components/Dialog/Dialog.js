@@ -1,13 +1,14 @@
 import * as ReactDOM from "react-dom";
+import { Screen } from "../../utils/screen";
 import "./Dialog.css";
 
 function DialogCom(props) {
   return (
-    <div
-      className="dialog"
-    >
-      <div className="dialog-content">{props.content}</div>
-      <button onClick={() => props.onClickOKButton()}>OK</button>
+    <div className="dialog">
+      <section className="dialog-box">
+        <div className="dialog-content">{props.content}</div>
+        <button onClick={() => props.onClickOKButton()}>OK</button>
+      </section>
     </div>
   );
 }
@@ -23,14 +24,16 @@ export class Dialog {
       <DialogCom
         content={msg || opt.content || ""}
         show={true}
-        onClickOKButton={()=>this.hide()}
+        onClickOKButton={() => this.hide()}
       />
     );
 
     ReactDOM.render(element, document.getElementById("other"));
+    Screen.lock();
   }
 
   hide() {
     ReactDOM.render(<div></div>, document.getElementById("other"));
+    Screen.unlock();
   }
 }

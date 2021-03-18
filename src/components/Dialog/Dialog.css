@@ -1,11 +1,26 @@
-.dialog {
-  border: 1px solid #ccc;
+.dialog{
+  background: rgba(0,0,0,0);
   position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.dialog-box {
+  border: 1px solid #ccc;
+  position: absolute;
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   border-radius: 5px;
-  padding: 20px 16px;
+  padding: 20px 40px;
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.dialog-content{
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 20px;
 }

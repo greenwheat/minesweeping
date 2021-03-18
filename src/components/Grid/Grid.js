@@ -155,6 +155,7 @@ export class Grid extends Component {
           });
         } else if (bomb) {
           status = "fail";
+          this.props.onGameEnd(status);
           dialog.show("Game Over!");
           // alert("Game Over!");
         }
@@ -176,7 +177,11 @@ export class Grid extends Component {
         .filter(item => item !== null);
       if (String(unOpenedCells) === String(this.state.bombs)) {
         status = "success";
+        this.props.onGameEnd(status);
         dialog.show("Congratulation!")
+        this.setState({
+          leftBombCount: 0
+        })
         // alert("Congratulation!");
       }
       // console.log("unOpenedCells and bombs", unOpenedCells, this.state.bombs);
@@ -240,7 +245,6 @@ export class Grid extends Component {
   render() {
     return (
       <div>
-        <div>status: {this.state.status}</div>
         <div>left bombs: {this.state.leftBombCount}</div>
         <section className="grid">{this.renderRows()}</section>
       </div>
