@@ -1,12 +1,13 @@
-.dialog{
-  background: rgba(0,0,0,0);
+.dialog {
+  background: rgba(0, 0, 0, 0);
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
 }
-.dialog-box {
+
+.dialogBox {
   border: 1px solid #ccc;
   position: absolute;
   top: 30%;
@@ -19,7 +20,8 @@
   display: flex;
   flex-direction: column;
 }
-.dialog-content{
+
+.dialogContent {
   font-size: 14px;
   line-height: 20px;
   margin-bottom: 20px;

@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Cell } from "./../Cell/Cell";
 import { Dialog } from "../Dialog/Dialog";
-import "./Grid.css";
+import CSS from "./Grid.module.css";
 
 const dialog = new Dialog();
 
@@ -36,7 +36,7 @@ export class Grid extends Component {
   }
 
   componentDidMount() {
-    this.props.onRef(this);
+    typeof this.props.onRef === "function" && this.props.onRef(this);
   }
 
   getCurIndex(row, col) {
@@ -60,6 +60,7 @@ export class Grid extends Component {
       setTimeout(() => {
         const index = this.getCurIndex(row, col);
         this.openCell(index);
+        this.props.onOpenFirstCell && this.props.onOpenFirstCell();
       }, 100);
     } else {
       const index = this.getCurIndex(row, col);
@@ -225,7 +226,7 @@ export class Grid extends Component {
     const rows = [];
     for (let i = 0; i < MODES[this.props.mode].row; i++) {
       rows.push(
-        <div key={i} className="grid-row">
+        <div key={i} className={CSS.gridRow}>
           {this.renderCols(i)}
         </div>
       );
@@ -246,7 +247,7 @@ export class Grid extends Component {
     return (
       <div>
         <div>left bombs: {this.state.leftBombCount}</div>
-        <section className="grid">{this.renderRows()}</section>
+        <section className={CSS.grid}>{this.renderRows()}</section>
       </div>
     );
   }

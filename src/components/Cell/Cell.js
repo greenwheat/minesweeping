@@ -1,4 +1,4 @@
-import "./Cell.css";
+import CSS from "./Cell.module.css";
 
 const NUMBER_COLORS = {
   1: "blue",
@@ -21,13 +21,13 @@ export function Cell(props) {
   // console.log("cell props", props);
   const inner = (() => {
     if (props.flag && !props.opened) {
-      return <span className="flag">P</span>;
+      return <span className={CSS.flag}>P</span>;
     }
     if (props.bomb) {
       if (props.opened) {
-        return <div className="bomb opened"></div>;
+        return <div className={`${CSS.bomb} ${CSS.opened}`}></div>;
       } else if (props.status === "success" || props.status === "fail") {
-        return <div className="bomb"></div>;
+        return <div className={CSS.bomb}></div>;
       }
       return;
     } else if (props.number && props.opened) {
@@ -40,7 +40,7 @@ export function Cell(props) {
   })();
   return (
     <div
-      className="cell"
+      className={CSS.cell}
       style={{ background: props.opened === true ? "white" : "" }}
       onClick={() => {
         console.log(props.row, props.col);

@@ -1,12 +1,12 @@
 import * as ReactDOM from "react-dom";
 import { Screen } from "../../utils/screen";
-import "./Dialog.css";
+import CSS from "./Dialog.module.css";
 
 function DialogCom(props) {
   return (
-    <div className="dialog">
-      <section className="dialog-box">
-        <div className="dialog-content">{props.content}</div>
+    <div className={CSS.dialog}>
+      <section className={CSS.dialogBox}>
+        <div className={CSS.dialogContent}>{props.content}</div>
         <button onClick={() => props.onClickOKButton()}>OK</button>
       </section>
     </div>

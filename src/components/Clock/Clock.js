@@ -1,4 +1,4 @@
-import "./Clock.css";
+import CSS from "./Clock.module.css";
 import { Component } from "react";
 import { NumberBox } from "../NumberBox/NumberBox";
 
@@ -11,18 +11,38 @@ export class Clock extends Component {
   }
 
   componentDidMount() {
-    this.props.onRef(this);
-    this.timerID = setInterval(() => {
-      this.tick();
-    }, 1000);
+    typeof this.props.onRef === "function" && this.props.onRef(this);
+    // this.start();
   }
 
   componentWillUnmount() {
     this.stop();
   }
 
-  stop() {
+  start() {
+    this.reset();
+    this.play();
+  }
+
+  stop(){
+    this.pause();
+    this.reset();
+  }
+
+  pause() {
     clearInterval(this.timerID);
+  }
+
+  play(){
+    this.timerID = setInterval(() => {
+      this.tick();
+    }, 1000);
+  }
+
+  reset() {
+    this.setState({
+      seconds: 0
+    });
   }
 
   tick() {

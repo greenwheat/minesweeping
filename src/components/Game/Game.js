@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Grid } from "../Grid/Grid";
-
+import { Clock } from "../Clock/Clock";
+import CSS from "./Game.module.css";
 export class Game extends Component {
   constructor(props) {
     super(props);
@@ -10,12 +11,21 @@ export class Game extends Component {
     };
   }
 
-  onRef(ref) {
-    this.child = ref;
+  onGridRef(ref) {
+    this.childGrid = ref;
+  }
+
+  onClockRef(ref) {
+    this.childClock = ref;
+  }
+
+  onOpenFirstCell() {
+    this.childClock.start();
   }
 
   reset() {
-    this.child.reset();
+    this.childGrid.reset();
+    this.childClock.reset();
     this.setState({
       status: ""
     });
@@ -30,11 +40,12 @@ export class Game extends Component {
   }
 
   onGameEnd(status) {
+    this.childClock.pause();
     this.setState({
       status
     });
   }
-  
+
   render() {
     let status;
     switch (this.state.status) {
@@ -58,14 +69,38 @@ export class Game extends Component {
         >
           重新开始
         </button>
-        <button onClick={() => {this.switchMode("easy")}}>简单</button>
-        <button onClick={() => {this.switchMode("normal")}}>普通</button>
-        <button onClick={() => {this.switchMode("hard")}}>困难</button>
-        <div>{status}</div>
+        <button
+          onClick={() => {
+            this.switchMode("easy");
+          }}
+        >
+          简单
+        </button>
+        <button
+          onClick={() => {
+            this.switchMode("normal");
+          }}
+        >
+          普通
+        </button>
+        <button
+          onClick={() => {
+            this.switchMode("hard");
+          }}
+        >
+          困难
+        </button>
+
+        <section className={CSS.statusArea}>
+          <Clock onRef={this.onClockRef.bind(this)} />
+          <div>{status}</div>
+        </section>
+
         <Grid
           mode={this.state.mode}
-          onRef={this.onRef.bind(this)}
+          onRef={this.onGridRef.bind(this)}
           onGameEnd={status => this.onGameEnd(status)}
+          onOpenFirstCell={() => this.onOpenFirstCell()}
         />
       </div>
     );

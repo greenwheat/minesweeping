@@ -1,7 +1,7 @@
-import "./NumberBox.css";
+import CSS from "./NumberBox.module.css";
 
 export function NumberBox(props) {
   return (
-    <div className="number-box">{props.value}</div>
+    <div className={CSS.numberBox}>{props.value}</div>
   )
 }
